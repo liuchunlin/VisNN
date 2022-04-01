@@ -14,7 +14,7 @@ from nn import Network, TorchNetwork
 from nndraw import draw_network
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-#device = "cpu"
+device = "cpu"
 print(f"Using {device} device")
 
 
