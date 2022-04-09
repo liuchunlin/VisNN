@@ -113,8 +113,8 @@ def draw_train_statistics(ax2:Axes, t, train_loss, test_loss, test_accuracy):
 
     if is_first_draw_train_statistics:
         is_first_draw_train_statistics = False
-        train_loss_line, = ax2.plot([], [], lw=2, color='red', label='train loss')
-        test_loss_line, = ax2.plot([], [], lw=2, color='green', label='test loss')
+        train_loss_line, = ax2.plot([], [], lw=2, color='green', label='train loss')
+        test_loss_line, = ax2.plot([], [], lw=2, color='red', label='test loss')
         ax2.legend()
         accuracy_text = ax2.text(0.2, 0.8, "000", transform=ax2.transAxes)
 
@@ -143,6 +143,7 @@ def create_model():
     model.addlayer(2)
     model.addlayer(8)
     model.addlayer(8)
+    model.addlayer(4)
     model.addlayer(2)
     return model
     # return TorchNetwork()
@@ -174,9 +175,9 @@ def main():
     model = create_model().to(device)
     draw_network(ax, model, True)
 
-    lr = 1e-1
-    momentum = 0.3
-    dampening = 0.3
+    lr = 1e-2
+    momentum = 0
+    dampening = 0
     weight_decay = 0.001
     nesterov = False
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=momentum,

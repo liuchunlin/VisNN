@@ -20,7 +20,8 @@ class Node(nn.Module):
         super(Node, self).__init__()
         self.outlinks = []
         self.inlinks = []
-        self.params = Parameter(torch.zeros(3, dtype=torch.float32))
+        self.params = Parameter(torch.rand(7, dtype=torch.float32))
+        self.params.data[0].fill_(0)
         self.xy = None
         self.output = None
         self.activefunc = self.myactivefunc
@@ -42,9 +43,13 @@ class Node(nn.Module):
         return self.activefunc(input)
 
     def myactivefunc(self, input):
-        return torch.relu(input)
+        #return torch.relu(input)
         #return torch.sigmoid(input)
         #return torch.tanh(input)
+
+        a = self.params[1:]
+        return a[0] * torch.tanh(input) * torch.sin(a[1]*input + a[2]) + a[3]*input + a[4]
+        #return torch.tanh(input) * torch.sin(a[1]*input + a[2]) + a[3]*input
 
 
 class Network(nn.Module):
